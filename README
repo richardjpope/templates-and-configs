@@ -1,0 +1,6 @@
+A fabric deployment script for django derived from:
+
+http://morethanseven.net/2009/07/27/fabric-django-git-apache-mod_wsgi-virtualenv-and-p/
+and http://github.com/fiee/generic_django_project
+
+It handles a production  and staging server, removes the need for keeping config files in version control, unix creates users and handles south migrations (just)
