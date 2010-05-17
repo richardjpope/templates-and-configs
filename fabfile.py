@@ -1,3 +1,11 @@
+# a fabric deployment script for django derived from:
+#
+# http://morethanseven.net/2009/07/27/fabric-django-git-apache-mod_wsgi-virtualenv-and-p/
+# and http://github.com/fiee/generic_django_project
+#
+# it handles a production  and staging server, removes the need for keeping config files in version control
+# and creates users
+
 from __future__ import with_statement # needed for python 2.5
 from fabric.api import *
 from fabric.contrib.files import exists
