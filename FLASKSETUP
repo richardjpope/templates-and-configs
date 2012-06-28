@@ -1,0 +1,39 @@
+#!/bin/bash
+
+die () {
+    echo >&2 "$@"
+    exit 1
+}
+
+APP_NAME=$1
+APP_DIR="/data/vhost/"$1
+
+#sanity check
+[ "$#" -eq 1 ] || die "1 arguments required, $# provided"
+
+#create directory
+mkdir $APP_DIR
+cd $APP_DIR
+
+#setup virtual environemnt
+virtualenv $APP_DIR
+source $APP_DIR"/bin/activate"
+
+#install flask
+pip install Flask
+
+
+#create main file
+#------------------------------------------------------------------
+cat >> $APP_DIR"/"$APP_NAME"/index.py" << EOF
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "Hello!"
+
+if __name__ == "__main__":
+    app.run()
+EOF
+#------------------------------------------------------------------
