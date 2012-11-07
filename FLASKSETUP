@@ -1,5 +1,10 @@
 #!/bin/bash
+<<<<<<< HEAD
 
+=======
+#-add templates (html5)
+#add css,imagesetc
+>>>>>>> a041b0dd269d4f33aded8ae8cecc14451e6cb4bd
 die () {
     echo >&2 "$@"
     exit 1
@@ -22,18 +27,120 @@ source $APP_DIR"/bin/activate"
 #install flask
 pip install Flask
 
+<<<<<<< HEAD
 
 #create main file
 #------------------------------------------------------------------
 cat >> $APP_DIR"/"$APP_NAME"/index.py" << EOF
 from flask import Flask
 app = Flask(__name__)
+=======
+#create main files
+echo "Creating files"
+#------------------------------------------------------------------
+cat >> $APP_DIR"/app.py" << EOF
+from flask import Flask, request, redirect, render_template
+import jinja2
+import os
+
+app = Flask(__name__)
+app.debug = True
+>>>>>>> a041b0dd269d4f33aded8ae8cecc14451e6cb4bd
 
 @app.route("/")
 def index():
     return "Hello!"
 
+<<<<<<< HEAD
 if __name__ == "__main__":
     app.run()
 EOF
 #------------------------------------------------------------------
+=======
+if __name__ == '__main__':
+    # Bind to PORT if defined, otherwise default to 5000.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+EOF
+#------------------------------------------------------------------
+
+#------------------------------------------------------------------
+cat >> $APP_DIR"/requirements.txt" << EOF
+Flask==0.9
+Jinja2==2.6
+EOF
+#------------------------------------------------------------------
+
+#------------------------------------------------------------------
+cat >> $APP_DIR"/Procfile" << EOF
+web: python app.py
+EOF
+#------------------------------------------------------------------
+
+#------------------------------------------------------------------
+cat >> $APP_DIR"/.gitignore" << EOF
+bin
+include
+lib
+.Python
+*.pyc
+EOF
+#------------------------------------------------------------------
+
+#add css and gubbins
+mkdir $APP_DIR"/static"
+mkdir $APP_DIR"/static/css"
+mkdir $APP_DIR"/static/images"
+mkdir $APP_DIR"/static/javascript"
+mkdir $APP_DIR"/templates"
+
+touch $APP_DIR"/TODO.txt"
+touch $APP_DIR"/README.md"
+touch $APP_DIR"/static/css/main.css"
+touch $APP_DIR"/static/javascript/main.js"
+
+#templates
+#------------------------------------------------------------------
+cat >> $APP_DIR"/templates/base.html" << EOF
+<!doctype html>
+<html>
+<head>
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='images/iphone_icon.png') }}" />
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/iphone_icon.png') }}" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}"/>
+        <link href="{{ url_for('static', filename='images/startup.png') }}" rel="apple-touch-startup-image" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='javascript/main.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <title>{% block title %}{% endblock %}|$APP_NAME</title>
+    {% block head %}
+    {% endblock %}
+</head>
+<body onload="{% block onload %}{% endblock %}">
+    {% block content %}
+    {% endblock %}
+</body>
+EOF
+#------------------------------------------------------------------
+#------------------------------------------------------------------
+cat >> $APP_DIR"/templates/index.html" << EOF
+{% extends "base.html" %}
+{% block content %}
+  <h1>Hello</h1>
+{% endblock %}
+EOF
+#------------------------------------------------------------------
+
+
+#setup git
+cd $APP_DIR
+git init .
+
+#send to heroku
+heroku create
+git add .
+git commit -m "init"
+git push heroku master
+>>>>>>> a041b0dd269d4f33aded8ae8cecc14451e6cb4bd
