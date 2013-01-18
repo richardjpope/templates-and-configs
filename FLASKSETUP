@@ -1,10 +1,6 @@
 #!/bin/bash
-<<<<<<< HEAD
-
-=======
 #-add templates (html5)
 #add css,imagesetc
->>>>>>> a041b0dd269d4f33aded8ae8cecc14451e6cb4bd
 die () {
     echo >&2 "$@"
     exit 1
@@ -27,14 +23,6 @@ source $APP_DIR"/bin/activate"
 #install flask
 pip install Flask
 
-<<<<<<< HEAD
-
-#create main file
-#------------------------------------------------------------------
-cat >> $APP_DIR"/"$APP_NAME"/index.py" << EOF
-from flask import Flask
-app = Flask(__name__)
-=======
 #create main files
 echo "Creating files"
 #------------------------------------------------------------------
@@ -45,18 +33,11 @@ import os
 
 app = Flask(__name__)
 app.debug = True
->>>>>>> a041b0dd269d4f33aded8ae8cecc14451e6cb4bd
 
 @app.route("/")
 def index():
     return "Hello!"
 
-<<<<<<< HEAD
-if __name__ == "__main__":
-    app.run()
-EOF
-#------------------------------------------------------------------
-=======
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get('PORT', 5000))
@@ -143,4 +124,3 @@ heroku create
 git add .
 git commit -m "init"
 git push heroku master
->>>>>>> a041b0dd269d4f33aded8ae8cecc14451e6cb4bd

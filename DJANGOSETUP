@@ -32,6 +32,12 @@ django-admin.py startproject $APP_NAME
 #remove existing settings file
 rm $APP_DIR"/"$APP_NAME"/settings.py"
 
+#------------------------------------------------------------------
+cat >> $APP_DIR"/Procfile" << EOF
+web: python $APP_NAME'/manage.py runserver 0.0.0.0:$PORT --noreload'
+EOF
+#------------------------------------------------------------------
+
 #create local settings file
 #------------------------------------------------------------------
 cat >> $APP_DIR"/"$APP_NAME"/local_settings.py" << EOF
