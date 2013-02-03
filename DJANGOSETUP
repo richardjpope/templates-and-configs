@@ -248,4 +248,5 @@ git add .
 git commit -m "init"
 git push heroku master
 heroku addons:add heroku-postgresql:dev
+heroku ps:scale web=1
 heroku run python $APP_NAME/manage.py syncdb
