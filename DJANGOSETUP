@@ -34,7 +34,7 @@ rm $APP_DIR"/"$APP_NAME"/settings.py"
 
 #------------------------------------------------------------------
 cat >> $APP_DIR"/Procfile" << EOF
-web: python $APP_NAME'/manage.py runserver 0.0.0.0:$PORT --noreload'
+web: python $APP_NAME/manage.py runserver 0.0.0.0:$PORT --noreload
 EOF
 #------------------------------------------------------------------
 
@@ -193,7 +193,7 @@ cat >> $APP_DIR/$APP_NAME/main/views.py << EOF
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
-import models 
+import models
 
 def index(request):
     data= {}
@@ -212,9 +212,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^$', main_views.index, name='index'),
-    (r'^admin/', include(admin.site.urls)),    
-    url(r'^site-media/(?P<path>.*)$',       'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes':True}),    
-    url(r'^admin-media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.ADMIN_MEDIA_ROOT, 'show_indexes':True}),        
+    (r'^admin/', include(admin.site.urls)),
+    url(r'^site-media/(?P<path>.*)$',       'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes':True}),
+    url(r'^admin-media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.ADMIN_MEDIA_ROOT, 'show_indexes':True}),
 
 )
 EOF
