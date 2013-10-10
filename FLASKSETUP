@@ -7,7 +7,7 @@ die () {
 }
 
 APP_NAME=$1
-APP_DIR="/data/vhost/"$1
+APP_DIR="~/code/"$1
 
 #sanity check
 [ "$#" -eq 1 ] || die "1 arguments required, $# provided"
@@ -87,14 +87,13 @@ cat >> $APP_DIR"/templates/base.html" << EOF
 <html>
 <head>
         <meta name="viewport" content="width=device-width,minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='images/iphone_icon.png') }}" />
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/iphone_icon.png') }}" />
         <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}"/>
-        <link href="{{ url_for('static', filename='images/startup.png') }}" rel="apple-touch-startup-image" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='javascript/main.js') }}"></script>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
         <title>{% block title %}{% endblock %}|$APP_NAME</title>
     {% block head %}
     {% endblock %}

@@ -6,7 +6,7 @@ die () {
 }
 
 APP_NAME=$1
-APP_DIR="/data/vhost/"$1
+APP_DIR="~/code/"$1
 
 #sanity check
 [ "$#" -eq 1 ] || die "1 arguments required, $# provided"
