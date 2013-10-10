@@ -6,7 +6,7 @@ die () {
 }
 
 APP_NAME=$1
-APP_DIR="~/code/"$1
+APP_DIR="/Users/richardpope/code/"$1
 
 #sanity check
 [ "$#" -eq 1 ] || die "1 arguments required, $# provided"
@@ -277,13 +277,13 @@ python $APP_NAME/manage.py migrate main
 cd $APP_DIR
 # git init .
 
-# #send to heroku
-heroku create
-git add .
-git commit -m "init"
-git push heroku master
-heroku addons:add heroku-postgresql:dev
-heroku ps:scale web=1
-heroku run python $APP_NAME/manage.py syncdb
-heroku run python $APP_NAME/manage.py migrate main
+# # #send to heroku
+# heroku create
+# git add .
+# git commit -m "init"
+# git push heroku master
+# heroku addons:add heroku-postgresql:dev
+# heroku ps:scale web=1
+# heroku run python $APP_NAME/manage.py syncdb
+# heroku run python $APP_NAME/manage.py migrate main
 
